@@ -1,0 +1,21 @@
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    
+    label {
+        font-weight: 400;
+        font-size: .7rem;
+        margin-bottom: .2rem;
+    }
+
+    input {
+        background-color: #e0e0e0;
+        border: none;
+        padding: .5rem .6rem;
+        width: 22rem;
+        margin-bottom: 1.2rem;
+        border-radius: .5rem;
+    }
+}
