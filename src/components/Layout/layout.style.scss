@@ -32,6 +32,13 @@
                 color: #3d348b;
             }
 
+            p {
+                font-size: .8rem;
+                font-weight: 400;
+                font-style: italic;
+                margin: 0 .8rem;
+            }
+
             button {
                 background-color: #3d348b;
                 padding: .5rem 1rem;
@@ -39,6 +46,7 @@
                 border: none;
                 border-radius: 1.2rem;
                 color: #fff;
+                cursor: pointer;
             }
 
             a {

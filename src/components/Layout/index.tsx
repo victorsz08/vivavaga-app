@@ -5,31 +5,33 @@ import { useEffect, useState } from "react";
 
 
 export const Layout = () => {
-    const [token, setToken] = useState(sessionStorage.getItem('token'));
+    const [token, setToken] = useState(localStorage.getItem('Auth: token'));
     
     useEffect(() => {
-        setToken(token)
-    },[token]);
+        setToken(localStorage.getItem('Auth: token'))
+    },[localStorage.getItem('Auth: token')]);
+
+
+    function logout() {
+        localStorage.removeItem("Auth: token");
+    }
 
     return (
         <section className="layout-container">
             <header className="header-container">
                 <h1>VivaVaga</h1>
+                {token  && 
                 <nav className="nav-container">
-                    {token && 
-                    <>
                     <Link to="/">Home</Link>
                     <Link to="/gerenciamento">Gerenciar Estacionamento</Link>
                     <Link to="/minha-conta">Meus Dados</Link>
-                    </>
-                    }
-                </nav>
+                </nav>}
                 <nav className="nav-login-container">
-                    {token ? 
+                    {token === "" ? 
                     <>
                     <FaCircleUser/>
-                    <Link to="/minha-conta">example@email.com</Link>
-                    <button>sair</button>
+                    <p>example@email.com</p>
+                    <button onClick={()=> logout}>sair</button>
                     </>
                     :
                     <>
