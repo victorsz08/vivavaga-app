@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Input } from "../../components/Input"
 import { useState } from "react"
 import "./register.style.scss";
+import api from "../../services/api";
 
 
 export const Register = () => {
@@ -9,15 +10,11 @@ export const Register = () => {
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
     const [erro, setErro] = useState("");
+    const navigate = useNavigate()
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-
-        if(confirmPassword !== password){
-            setErro("as senhas não correspondem!");
-        };
 
         const user = {
             name,
@@ -26,8 +23,13 @@ export const Register = () => {
             password
         }
 
-        console.log(user);
-    }
+        api.post("users", user)
+            .then(response => {
+                navigate("/forms/login")
+            }).catch(error => {
+                setErro(error?.response?.data?.message)
+            });
+    };
 
 
     return (
@@ -37,7 +39,6 @@ export const Register = () => {
             <Input label="sobrenome" value={lastname} onchange={setLastname} type="text"/>
             <Input label="email" value={email} onchange={setEmail} type="email"/>
             <Input label="senha" value={password} onchange={setPassword} type="password"/>
-            <Input label="confirmar senha" value={confirmPassword} onchange={setConfirmPassword} type="password"/>
             {erro && <p id="error" >{erro}</p>}
             <div className="btn-register-container">
                 <button>Cadastrar</button>

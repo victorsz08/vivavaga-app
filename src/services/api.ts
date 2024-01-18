@@ -9,4 +9,18 @@ const api = axios.create({
     }
 });
 
+api.interceptors.request.use(function (config) {
+
+    const token = localStorage.getItem("@Auth:token");
+    if (token && config.headers) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
+    return config;
+  }, function (error) {
+
+    console.log('Erro no interceptor do axios')
+    sessionStorage.removeItem('token')
+    return Promise.reject(error);
+  });
+
 export default api;

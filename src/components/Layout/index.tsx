@@ -1,37 +1,36 @@
 import { Link, Outlet } from "react-router-dom";
 import "./layout.style.scss";
 import { FaCircleUser } from "react-icons/fa6";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../context/context";
 
 
 export const Layout = () => {
-    const [token, setToken] = useState(localStorage.getItem('Auth: token'));
-    
-    useEffect(() => {
-        setToken(localStorage.getItem('Auth: token'))
-    },[localStorage.getItem('Auth: token')]);
+    const { auth, setAuth, email} = useContext(AuthContext)
 
 
     function logout() {
-        localStorage.removeItem("Auth: token");
+        localStorage.removeItem("@Auth:token");
+        localStorage.removeItem("@Email");
+        setAuth(false);
     }
 
     return (
         <section className="layout-container">
             <header className="header-container">
                 <h1>VivaVaga</h1>
-                {token  && 
+                {auth  && 
                 <nav className="nav-container">
                     <Link to="/">Home</Link>
                     <Link to="/gerenciamento">Gerenciar Estacionamento</Link>
                     <Link to="/minha-conta">Meus Dados</Link>
                 </nav>}
                 <nav className="nav-login-container">
-                    {token === "" ? 
+                    {auth ? 
                     <>
                     <FaCircleUser/>
-                    <p>example@email.com</p>
-                    <button onClick={()=> logout}>sair</button>
+                    <p>{email}</p>
+                    <button onClick={logout}>sair</button>
                     </>
                     :
                     <>

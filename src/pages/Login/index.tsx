@@ -3,6 +3,7 @@ import { Input } from "../../components/Input"
 import "./login.style.scss";
 import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "../../context/context";
+import api from "../../services/api";
 
 
 
@@ -11,6 +12,7 @@ export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [erro, setErro] = useState("");
+    const { setAuth } = useContext(AuthContext);
     
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -20,6 +22,15 @@ export const Login = () => {
             email,
             password
         };
+
+        api.post("/login", data)
+            .then(response => {
+                localStorage.setItem("@Auth:token", response.data.token);
+                localStorage.setItem("@Email", data.email);
+                setAuth(true);
+            }).catch((error) => {
+                setErro(error.response?.data?.error)
+            })
 
     };
 

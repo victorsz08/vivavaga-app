@@ -5,6 +5,7 @@ import { Login } from "../pages/Login";
 import { Forms } from "../pages/Forms";
 import { Register } from "../pages/Register";
 import { Layout } from "../components/Layout";
+import { Home } from "../pages/Home";
 
 
 export const RoutesApp = () => {
@@ -18,6 +19,7 @@ export const RoutesApp = () => {
                     <Route path="registro" element={<Register/>}/>
                 </Route>
             <Route path="/" element={auth ? <Layout/> : <Navigate to="/forms/login"/>}>
+                    <Route path="" element={<Home/>}/>
                     <Route path="minha-conta" element={<h1>Hello World</h1>}/>
                     <Route path="gerenciamento" element={<h1>Gerenciamento</h1>}/>
                 </Route>
