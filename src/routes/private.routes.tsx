@@ -8,7 +8,7 @@ import { AuthContext } from "../context/context"
 
 export const PrivateRoutes = () => {
     const { auth } = useContext(AuthContext);
-    
+
     return (
         <BrowserRouter>
             <Routes>
