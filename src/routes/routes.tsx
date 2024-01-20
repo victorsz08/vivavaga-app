@@ -14,12 +14,14 @@ export const RoutesApp = () => {
     return (
         <BrowserRouter>
         <Routes>
+            <Route path="/" element={<Layout/>}>
+                <Route path="/" element={<Home/>}/>
+            </Route>
             <Route path="/forms" element={!auth ? <Forms/> : <Navigate to="/"/>}>
                     <Route path="login" element={<Login/>}/>
                     <Route path="registro" element={<Register/>}/>
                 </Route>
-            <Route path="/" element={auth ? <Layout/> : <Navigate to="/forms/login"/>}>
-                    <Route path="" element={<Home/>}/>
+                <Route path="/" element={auth ? <Layout/> : <Navigate to="/home"/>}>
                     <Route path="minha-conta" element={<h1>Hello World</h1>}/>
                     <Route path="gerenciamento" element={<h1>Gerenciamento</h1>}/>
                 </Route>

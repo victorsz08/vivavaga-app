@@ -40,7 +40,7 @@ export const Layout = () => {
                     }
                 </nav> 
             </header>
-            <section>
+            <section className="outlet-container">
 
                <Outlet/>
 

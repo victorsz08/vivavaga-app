@@ -1,9 +1,9 @@
 .home-container {
-    padding: 10rem 4rem;
     height: 100vh;
+    text-align: center;
 
     .titles-container {
-        margin-bottom: 3rem;
+        margin-bottom: 8rem;
 
         h3 {
             font-style: italic;
@@ -30,5 +30,35 @@
         text-decoration: none;
         padding: 1rem;
         border-radius: 2rem;
+    }
+
+    .features-container {
+        display: flex;
+        justify-content: space-around;
+
+        .feature {
+            width: 20rem;
+            height: 20rem;
+            border: 3px solid #646464;
+            border-radius: 1.4rem;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+            svg {
+                width: 3rem;
+                height: 3rem;
+                margin-bottom: 1.7rem;
+                color: #646464;
+            }
+
+            p {
+                font-size: .8remrem;
+                color: #646464;
+            }
+            
+        }
     }
 }
