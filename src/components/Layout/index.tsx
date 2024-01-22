@@ -23,7 +23,7 @@ export const Layout = () => {
                 <nav className="nav-container">
                     <Link to="/">Home</Link>
                     <Link to="/gerenciamento">Gerenciar Estacionamento</Link>
-                    <Link to="/minha-conta">Meus Dados</Link>
+                    <Link to="/minhaconta">Meus Dados</Link>
                 </nav>}
                 <nav className="nav-login-container">
                     {auth ? 

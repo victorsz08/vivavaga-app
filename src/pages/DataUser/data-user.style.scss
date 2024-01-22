@@ -1,0 +1,32 @@
+.data-user-container {
+    background-color: #fff;
+    height: 100vh;
+
+    h2 {
+        margin-bottom: 2rem;
+        color: #3d348b;
+    }
+
+    .nav-container {
+        a {
+            font-weight: 700;
+            font-size: .8rem;
+            margin: 0 1rem 0 0;
+            padding-left: .5rem;
+            color: #888888;
+            transition: .2s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        #active {
+            border-left: 4px solid #3d348b;
+            color: #000;
+            transition: .2s;
+        }
+    }
+
+    .data-container {
+        padding: 6rem 0;
+    }
+}

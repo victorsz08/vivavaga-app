@@ -6,6 +6,8 @@ import { Forms } from "../pages/Forms";
 import { Register } from "../pages/Register";
 import { Layout } from "../components/Layout";
 import { Home } from "../pages/Home";
+import { DataUser } from "../pages/DataUser";
+import { UserData } from "../components/UserData";
 
 
 export const RoutesApp = () => {
@@ -22,7 +24,10 @@ export const RoutesApp = () => {
                     <Route path="registro" element={<Register/>}/>
                 </Route>
                 <Route path="/" element={auth ? <Layout/> : <Navigate to="/home"/>}>
-                    <Route path="minha-conta" element={<h1>Hello World</h1>}/>
+                    <Route path="minhaconta" element={<DataUser/>}>
+                        <Route path="" element={<UserData/>}/>
+                        <Route path="dadosdoestacionamento" element={<h1>Dados do estacionamento</h1>}/>
+                    </Route>    
                     <Route path="gerenciamento" element={<h1>Gerenciamento</h1>}/>
                 </Route>
             </Routes>
