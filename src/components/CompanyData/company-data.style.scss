@@ -1,7 +1,18 @@
-.user-data-container {
+.company-data-container {
     width: 100%;
     display: flex;
     flex-direction: column;
+
+    a {
+        background-color: #3d348b;
+        border: none;
+        padding: .8rem;
+        font-weight: 700;
+        color: #fff;
+        border-radius: 1.2rem;
+        cursor: pointer;
+        text-decoration: none;
+    }
 
     input {
         font-size: .9rem;
@@ -14,6 +25,20 @@
     }
 
     input:focus {
+        outline: 0;
+    }
+
+    select {
+        font-size: .9rem;
+        font-weight: 400;
+        color: #000;
+        margin-bottom: 1.3rem;
+        padding: .6rem .3rem;
+        border-radius: .4rem;
+        border: 1px solid #a9a9a9;
+    }
+
+    select:focus {
         outline: 0;
     }
 

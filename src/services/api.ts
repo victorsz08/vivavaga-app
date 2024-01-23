@@ -19,7 +19,8 @@ api.interceptors.request.use(function (config) {
   }, function (error) {
 
     console.log('Erro no interceptor do axios')
-    sessionStorage.removeItem('token')
+    localStorage.removeItem("@Auth:token")
+    localStorage.removeItem("@Email")
     return Promise.reject(error);
   });
 

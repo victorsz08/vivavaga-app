@@ -8,6 +8,7 @@ import { Layout } from "../components/Layout";
 import { Home } from "../pages/Home";
 import { DataUser } from "../pages/DataUser";
 import { UserData } from "../components/UserData";
+import { CompanyData } from "../components/CompanyData";
 
 
 export const RoutesApp = () => {
@@ -23,10 +24,10 @@ export const RoutesApp = () => {
                     <Route path="login" element={<Login/>}/>
                     <Route path="registro" element={<Register/>}/>
                 </Route>
-                <Route path="/" element={auth ? <Layout/> : <Navigate to="/home"/>}>
+                <Route path="/" element={auth ? <Layout/> : <Navigate to="/"/>}>
                     <Route path="minhaconta" element={<DataUser/>}>
                         <Route path="" element={<UserData/>}/>
-                        <Route path="dadosdoestacionamento" element={<h1>Dados do estacionamento</h1>}/>
+                        <Route path="dadosdoestacionamento" element={<CompanyData/>}/>
                     </Route>    
                     <Route path="gerenciamento" element={<h1>Gerenciamento</h1>}/>
                 </Route>
