@@ -10,6 +10,7 @@ import { DataUser } from "../pages/DataUser";
 import { UserData } from "../components/UserData";
 import { CompanyData } from "../components/CompanyData";
 import { RegisterCompany } from "../components/RegisterCompany";
+import { ManagementPage } from "../pages/ManagementPage";
 
 
 export const RoutesApp = () => {
@@ -31,7 +32,7 @@ export const RoutesApp = () => {
                         <Route path="" element={<UserData/>}/>
                         <Route path="dadosdoestacionamento" element={<CompanyData/>}/>
                     </Route>    
-                    <Route path="gerenciamento" element={<h1>Gerenciamento</h1>}/>
+                    <Route path="gerenciamento" element={<ManagementPage/>}/>
                 </Route>
             </Routes>
     </BrowserRouter>
