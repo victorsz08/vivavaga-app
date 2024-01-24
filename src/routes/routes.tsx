@@ -9,6 +9,7 @@ import { Home } from "../pages/Home";
 import { DataUser } from "../pages/DataUser";
 import { UserData } from "../components/UserData";
 import { CompanyData } from "../components/CompanyData";
+import { RegisterCompany } from "../components/RegisterCompany";
 
 
 export const RoutesApp = () => {
@@ -19,6 +20,7 @@ export const RoutesApp = () => {
         <Routes>
             <Route path="/" element={<Layout/>}>
                 <Route path="/" element={<Home/>}/>
+                <Route path="criarempresa" element={<RegisterCompany/>}/>
             </Route>
             <Route path="/forms" element={!auth ? <Forms/> : <Navigate to="/"/>}>
                     <Route path="login" element={<Login/>}/>

@@ -36,33 +36,58 @@ const brazilStates = [
 export const CompanyData = () => {
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState("");
-  const [pricePerHour, setPricePerHour] = useState("");
+  const [pricePerHour, setPricePerHour] = useState<number>();
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [company, setCompany] = useState("");
+  const [companyId, setCompanyId] = useState("");
+
+  
 
   useEffect(() => {
     api
-      .get("/companies/owner")
+      .get("/company/owner")
       .then((response) => {
-        setCompany(response?.data);
+        console.log(response.data);
+        setCompanyId(response.data.id);
+        setCompany(response.data);
         setName(response.data.name);
-        setPricePerHour(response.data.pricePerHour);
+        setPricePerHour(response.data.price_per_hour);
         setCity(response.data.city);
         setState(response.data.state);
       })
       .catch((error) => {
         console.log(error?.response?.data);
       });
-  }, []);
+  }, [edit]);
 
   function handleEdit() {
     setEdit(true);
   }
 
   function handleSave() {
-    setEdit(false);
-  }
+    const formattedPrice = pricePerHour?.toFixed(2).replace(",", ".");
+
+    const data = {
+      name,
+      price_per_hour: formattedPrice,
+      city,
+      state
+    }
+
+    api.put(`companies/edit/${companyId}`, data)
+        .then(response => {
+            setCompanyId(response.data?.id);
+            setCompany(response?.data);
+            setName(response.data.name);
+            setPricePerHour(response.data.pricePerHour);
+            setCity(response.data.city);
+            setState(response.data.state);
+            setEdit(false);
+        }).catch((error) => {
+            console.log(error.response?.data)
+        });
+  };
 
   function handleCancelEdit() {
     setEdit(false);
@@ -74,7 +99,7 @@ export const CompanyData = () => {
         <>
           <h2>Nenhuma Empresa foi Encontrada</h2>
           <div className="create-actions-container">
-            <Link to="/forms/criarempresa">Criar Empresa</Link>
+            <Link to="/criarempresa">Criar Empresa</Link>
           </div>
         </>
       ) : (
@@ -87,12 +112,15 @@ export const CompanyData = () => {
           )}
           <label>Preço por hora:</label>
           {!edit ? (
-            <p>{pricePerHour}</p>
+            <p><strong>R$</strong> {pricePerHour?.toFixed(2)}</p>
           ) : (
             <input
               value={pricePerHour}
-              type="number"
-              onChange={(e) => setPricePerHour(e.target.value)}
+              type="number" 
+              min="0.00" 
+              max="10000.00" 
+              step="0.01"
+              onChange={(e) => setPricePerHour(parseFloat(e.target.value))}
             />
           )}
           <label>Cidade:</label>
