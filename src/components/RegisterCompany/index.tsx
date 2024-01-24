@@ -39,10 +39,8 @@ const brazilStates = [
 
 export const RegisterCompany = () => {
     const [name, setName] = useState("");
-    const [pricePerHour, setPricePerHour] = useState("");
+    const [pricePerHour, setPricePerHour] = useState<number>();
     const [city, setCity] = useState("");
-    const [neighborhood, setNeighborhood] = useState("");
-    const [road, setRoad] = useState("");
     const [state, setState] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -50,13 +48,12 @@ export const RegisterCompany = () => {
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        const formattedPrice = pricePerHour?.toFixed(2).replace(",", ".");
 
         const data = {
             name,
-            price_per_hour: pricePerHour,
+            price_per_hour: formattedPrice,
             city,
-            neighborhood,
-            road,
             state
         };
 
@@ -74,9 +71,15 @@ export const RegisterCompany = () => {
         <form className="register-company-container" onSubmit={handleSubmit}>
             <h2>Cadastrar Estacionamento</h2>
             <Input type="text" label="Nome do Estacionamento" value={name} onchange={setName}/>
-            <Input type="number" label="Preço por Hora:" placeholder="0.00" value={pricePerHour} onchange={setPricePerHour}/>
-            <Input type="text" label="Rua:" value={road} onchange={setRoad}/>
-            <Input type="text" label="Bairro:" value={neighborhood} onchange={setNeighborhood}/>
+            <label>Preço por Hora:</label>
+            <input
+              value={pricePerHour}
+              type="number" 
+              min="0.00" 
+              max="10000.00" 
+              step="0.01"
+              onChange={(e) => setPricePerHour(parseFloat(e.target.value))}
+            />
             <Input type="text" label="Cidade:" value={city} onchange={setCity}/>
             <label>Estado:</label>
             <select value={state} onChange={(e) => setState(e.target.value)}>

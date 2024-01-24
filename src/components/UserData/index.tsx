@@ -7,15 +7,27 @@ import { useNavigate } from "react-router-dom"
 
 export const UserData = () => {
     const [edit, setEdit] = useState(false);
-    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
     const [id, setId] = useState("");
+    const navigate = useNavigate();
 
     function handleEdit() {
         setEdit(true);
     };
+
+    function handleDelete() {
+        api.delete(`users/delete/${id}`)
+            .then(response => {
+                alert("Conta excluída!")
+                localStorage.removeItem("@Auth:token");
+                localStorage.removeItem("@Email");
+                navigate("/")
+            }).catch(error => {
+                alert("Ocorreu um erro!");
+            })
+    }
 
     function handleSave() {
         const data = {
@@ -66,7 +78,7 @@ export const UserData = () => {
             <div className="actions-container">
                 {!edit ? 
                 <>
-                <button>Excluir Estacionamento</button>
+                <button onClick={() => handleDelete()}>Excluir Estacionamento</button>
                 <button id="edit-info" onClick={() => handleEdit()}>Editar Informações</button>
                 </>
                 :

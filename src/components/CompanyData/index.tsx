@@ -42,6 +42,7 @@ export const CompanyData = () => {
   const [company, setCompany] = useState("");
   const [companyId, setCompanyId] = useState("");
 
+
   
 
   useEffect(() => {
@@ -64,6 +65,18 @@ export const CompanyData = () => {
   function handleEdit() {
     setEdit(true);
   }
+
+  function handleDelete() {
+    setEdit(true)
+    api.delete(`companies/delete/${companyId}`)
+      .then(response => {
+        setEdit(false);
+        alert("Estacionamento deletado!")
+      }).catch(error => {
+        alert("Ocorreu um erro, contate o suporte!");
+      })
+  };
+
 
   function handleSave() {
     const formattedPrice = pricePerHour?.toFixed(2).replace(",", ".");
@@ -142,7 +155,7 @@ export const CompanyData = () => {
           <div className="actions-container">
             {!edit ? (
               <>
-                <button>Excluir Conta</button>
+                <button onClick={() => handleDelete()}>Excluir Estacionamento</button>
                 <button id="edit-info" onClick={() => handleEdit()}>
                   Editar Informações
                 </button>
